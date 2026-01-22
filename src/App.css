@@ -4,6 +4,10 @@
   padding-bottom: 20px;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: visible;
+  position: relative;
+  display: block;
+  padding-top: 0;
 }
 
 .main-content {
@@ -11,6 +15,7 @@
   margin: 0 auto;
   padding: 0 16px;
   width: 100%;
+  margin-top: 160px;
 }
 
 .sub-navigation {
@@ -58,6 +63,7 @@
   .main-content {
     padding: 0 8px;
     max-width: 100%;
+    margin-top: 150px;
   }
 
   .sub-navigation {
@@ -79,6 +85,7 @@
 @media (max-width: 480px) {
   .main-content {
     padding: 0 6px;
+    margin-top: 140px;
   }
 
   .sub-navigation {
