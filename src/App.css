@@ -1,0 +1,94 @@
+.app {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding-bottom: 20px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.sub-navigation {
+  display: flex;
+  gap: 8px;
+  padding: 16px 0 16px 16px;
+  border-bottom: none;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 160px;
+  z-index: 200;
+  will-change: transform;
+}
+
+.sub-nav-btn {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-family: 'Open Sans', system-ui, sans-serif;
+}
+
+.sub-nav-btn:hover {
+  background-color: #e8e8e8;
+}
+
+.sub-nav-btn.active {
+  color: #2196F3;
+  background-color: #f0f0f0;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding-bottom: 12px;
+  }
+
+  .main-content {
+    padding: 0 8px;
+    max-width: 100%;
+  }
+
+  .sub-navigation {
+    padding: 10px 0 10px 12px;
+    gap: 6px;
+    margin-bottom: 12px;
+    border-bottom: none;
+    top: 149px;
+  }
+
+  .sub-nav-btn {
+    padding: 8px 14px;
+    font-size: 15px;
+    min-height: 36px;
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0 6px;
+  }
+
+  .sub-navigation {
+    padding: 8px 0 8px 8px;
+    gap: 4px;
+    top: 142px;
+  }
+
+  .sub-nav-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
