@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import DateRangePicker from './DateRangePicker'
+import BenchmarkSelector from './BenchmarkSelector'
 import './PnLOverview.css'
 
-function PnLOverview({ dateRange, setDateRange }) {
+function PnLOverview({ dateRange, setDateRange, onShowComponents }) {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showRangeDropdown, setShowRangeDropdown] = useState(false)
   const [selectedRange, setSelectedRange] = useState('Custom')
+  const [showBenchmarkSelector, setShowBenchmarkSelector] = useState(false)
+  const [selectedBenchmark, setSelectedBenchmark] = useState('SPX')
 
   const predefinedRanges = ['5D', '1M', '3M', '6M', 'YTD', '1Y', 'All']
 
@@ -52,7 +55,7 @@ function PnLOverview({ dateRange, setDateRange }) {
       </div>
 
       <div className="pnl-metrics">
-        <div className="metric-item">
+        <div className="metric-item" onClick={onShowComponents} style={{ cursor: 'pointer' }}>
           <div className="metric-label">
             P&L <span className="arrow-icon">{'>'}</span>
           </div>
@@ -64,9 +67,9 @@ function PnLOverview({ dateRange, setDateRange }) {
           </div>
           <div className="metric-value positive">+4.48%</div>
         </div>
-        <div className="metric-item">
+        <div className="metric-item" onClick={() => setShowBenchmarkSelector(true)} style={{ cursor: 'pointer' }}>
           <div className="metric-label">
-            <span className="dji-indicator"></span> DJI <span className="dropdown-arrow">▼</span>
+            <span className={selectedBenchmark === 'SPX' ? 'spx-indicator' : 'dji-indicator'}></span> {selectedBenchmark} <span className="dropdown-arrow">▼</span>
           </div>
           <div className="metric-value positive">+3.78%</div>
         </div>
@@ -77,6 +80,14 @@ function PnLOverview({ dateRange, setDateRange }) {
           dateRange={dateRange}
           setDateRange={setDateRange}
           onClose={() => setShowDatePicker(false)}
+        />
+      )}
+
+      {showBenchmarkSelector && (
+        <BenchmarkSelector
+          selectedBenchmark={selectedBenchmark}
+          onSelect={setSelectedBenchmark}
+          onClose={() => setShowBenchmarkSelector(false)}
         />
       )}
     </div>

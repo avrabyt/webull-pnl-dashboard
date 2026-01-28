@@ -1,7 +1,7 @@
 import React from 'react'
 import './HeaderBar.css'
 
-function HeaderBar() {
+function HeaderBar({ onMenuClick }) {
   return (
     <>
       <div className="header-bar">
@@ -13,7 +13,7 @@ function HeaderBar() {
           </h1>
         </div>
         <div className="header-right">
-          <button className="filter-button">☰</button>
+          <button className="filter-button" onClick={onMenuClick}>☰</button>
         </div>
       </div>
       <div className="alert-banner-wrapper">

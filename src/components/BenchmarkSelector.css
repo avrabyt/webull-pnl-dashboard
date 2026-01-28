@@ -1,0 +1,147 @@
+.benchmark-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.benchmark-modal {
+  background: white;
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  max-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUpFromBottom 0.3s ease-out;
+}
+
+@keyframes slideUpFromBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.benchmark-modal.closing {
+  animation: slideDownToBottom 0.3s ease-out;
+}
+
+@keyframes slideDownToBottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.benchmark-handle {
+  width: 40px;
+  height: 4px;
+  background: #d9d9d9;
+  border-radius: 2px;
+  margin: 12px auto 8px auto;
+  flex-shrink: 0;
+}
+
+.benchmark-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.benchmark-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.benchmark-search-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.benchmark-search-btn:hover {
+  opacity: 0.7;
+}
+
+.benchmark-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.benchmark-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.benchmark-item:active {
+  background-color: #f8f8f8;
+}
+
+.benchmark-item.selected {
+  background-color: #e3f2fd;
+}
+
+.benchmark-info {
+  flex: 1;
+}
+
+.benchmark-symbol {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.benchmark-name {
+  font-size: 13px;
+  color: #999;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+
+.benchmark-check {
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .benchmark-modal {
+    max-height: 80vh;
+  }
+}

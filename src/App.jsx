@@ -5,19 +5,34 @@ import PnLOverview from './components/PnLOverview'
 import TrendAnalysis from './components/TrendAnalysis'
 import AssetClassChart from './components/AssetClassChart'
 import PnLCalendar from './components/PnLCalendar'
+import PnLComponents from './components/PnLComponents'
+import NavigationDrawer from './components/NavigationDrawer'
 import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('P&L')
   const [activeSubTab, setActiveSubTab] = useState('Account P&L')
+  const [showPnLComponents, setShowPnLComponents] = useState(false)
+  const [showNavigationDrawer, setShowNavigationDrawer] = useState(false)
   const [dateRange, setDateRange] = useState({
     start: '09/18/2025',
     end: '01/16/2026'
   })
 
+  if (showPnLComponents) {
+    return (
+      <div className="app">
+        <PnLComponents 
+          dateRange={dateRange} 
+          onBack={() => setShowPnLComponents(false)} 
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="app">
-      <HeaderBar />
+      <HeaderBar onMenuClick={() => setShowNavigationDrawer(true)} />
       <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="main-content">
         <div className="sub-navigation">
@@ -35,11 +50,20 @@ function App() {
           </button>
         </div>
 
-        <PnLOverview dateRange={dateRange} setDateRange={setDateRange} />
+        <PnLOverview 
+          dateRange={dateRange} 
+          setDateRange={setDateRange}
+          onShowComponents={() => setShowPnLComponents(true)}
+        />
         <TrendAnalysis dateRange={dateRange} />
         <AssetClassChart dateRange={dateRange} />
         <PnLCalendar />
       </div>
+
+      <NavigationDrawer 
+        isOpen={showNavigationDrawer}
+        onClose={() => setShowNavigationDrawer(false)}
+      />
     </div>
   )
 }
