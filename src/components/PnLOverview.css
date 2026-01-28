@@ -8,8 +8,8 @@
     ),
     #F8FAFC;
   border-radius: 16px;
-  padding: 24px 24px;
-  margin: 20px 16px 20px 16px;
+  padding: 32px 24px 24px 24px;
+  margin: 20px 20px 48px 16px;
   box-shadow: none;
   position: relative;
   overflow: visible;
@@ -50,7 +50,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .pnl-overview-header .section-title {
@@ -158,8 +158,8 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
   justify-content: space-between;
 }
 
@@ -244,16 +244,16 @@
 
 .metric-value.positive {
   color: #2DBE8C;
-  font-size: 22px;
+  font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
   font-weight: 600;
 }
 
 .metric-value.negative {
   color: #E5533D;
-  font-size: 20px;
+  font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
