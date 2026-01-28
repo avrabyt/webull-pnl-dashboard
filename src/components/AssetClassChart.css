@@ -1,11 +1,12 @@
 .asset-class-chart {
-  background-color: #ffffff;
-  border-radius: 0;
+  background-color: #FFFFFF;
+  border-radius: 16px;
   padding: 20px;
-  margin: 0 0 20px 0;
+  margin: 0 16px 20px 16px;
   box-shadow: none;
   max-width: 100%;
-  width: 100%;
+  width: auto;
+  border: none;
 }
 
 .asset-header {
@@ -49,37 +50,37 @@
 }
 
 .legend-dot.stocks {
-  background-color: #0CAF82;
+  background-color: #2DBE8C;
 }
 
 .legend-dot.options {
-  background-color: #2196F3;
+  background-color: #2563EB;
 }
 
 .legend-label {
   flex: 0 1 auto;
   font-size: 13px;
-  color: #1a1a1a;
+  color: #6B7280;
   min-width: 50px;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   font-weight: 400;
 }
 
 .legend-value {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-align: right;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   font-variant-numeric: proportional-nums;
   white-space: nowrap;
 }
 
 .legend-value.positive {
-  color: #0CAF82;
+  color: #2DBE8C;
 }
 
 .legend-value.negative {
-  color: #f23645;
+  color: #E5533D;
 }
 
 @media (max-width: 768px) {

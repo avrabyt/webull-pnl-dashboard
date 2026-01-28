@@ -9,8 +9,8 @@ function AssetClassChart({ dateRange }) {
   // Data for the inner ring (Stocks and Options)
   // Order: Stocks first (green, small segment), Options second (gray, large segment)
   const innerRingData = [
-    { name: 'Stocks', value: Math.abs(stockValue), color: '#0CAF82' },
-    { name: 'Options', value: Math.abs(optionsValue), color: '#E0E0E0' }
+    { name: 'Stocks', value: Math.abs(stockValue), color: '#2DBE8C' },
+    { name: 'Options', value: Math.abs(optionsValue), color: '#E5E7EB' }
   ]
 
   // Data for the outer ring (thin blue ring - full circle)
@@ -38,7 +38,7 @@ function AssetClassChart({ dateRange }) {
                 innerRadius={78}
                 outerRadius={85}
                 dataKey="value"
-                fill="#2196F3"
+                fill="#2563EB"
                 startAngle={0}
                 endAngle={360}
               />

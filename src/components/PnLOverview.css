@@ -1,11 +1,19 @@
 .pnl-overview {
-  background: linear-gradient(135deg, #E8F2F8 0%, #F0F7FC 25%, #FAFCFD 50%, #F0F7FC 75%, #E6EFF5 100%);
-  border-radius: 12px;
+  background: 
+    linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.06) 0%,
+      rgba(59, 130, 246, 0.03) 40%,
+      rgba(255, 255, 255, 0) 75%
+    ),
+    #F8FAFC;
+  border-radius: 16px;
   padding: 24px 24px;
   margin: 20px 16px 20px 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   position: relative;
   overflow: visible;
+  border: none;
 }
 
 .pnl-overview::after {
@@ -15,10 +23,10 @@
   right: 0;
   width: 50%;
   height: 50%;
-  background: radial-gradient(ellipse at bottom right, rgba(200, 180, 220, 0.3) 0%, transparent 60%);
+  background: none;
   pointer-events: none;
   z-index: 0;
-  border-radius: 0 0 12px 0;
+  border-radius: 0 0 16px 0;
 }
 
 .pnl-overview > * {
@@ -47,21 +55,21 @@
 
 .pnl-overview-header .section-title {
   margin-bottom: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  letter-spacing: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4B5563;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.3px;
 }
 
 .date-range-text {
-  font-size: 16px;
-  color: #666;
-  margin-top: 0;
+  font-size: 12px;
+  color: #9CA3AF;
+  margin-top: 2px;
   line-height: 1.4;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .date-range-selector {
@@ -72,18 +80,18 @@
 }
 
 .range-button {
-  background: transparent;
-  border: 1px solid rgba(224, 224, 224, 0.5);
-  border-radius: 8px;
-  padding: 4px 10px;
+  background: #F1F5F9;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 6px 12px;
   font-size: 13px;
-  font-weight: 400;
-  color: #1a1a1a;
+  font-weight: 500;
+  color: #0F172A;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
 }
 
 .range-button:hover {
@@ -92,8 +100,8 @@
 
 .dropdown-arrow {
   font-size: 8px;
-  color: #1a1a1a;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  color: #0F172A;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   margin-left: 2px;
   display: inline-block;
   vertical-align: middle;
@@ -106,10 +114,10 @@
   top: 100%;
   right: 0;
   margin-top: 4px;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10001;
   min-width: 120px;
   max-height: 300px;
@@ -125,23 +133,24 @@
   background: none;
   border: none;
   font-size: 14px;
-  color: #1a1a1a;
+  color: #0F172A;
   cursor: pointer;
   transition: background-color 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
 }
 
 .range-option:hover {
-  background-color: #f5f5f5;
+  background-color: #F8FAFC;
 }
 
 .range-option.selected {
   background-color: #E3F2FD;
-  color: #2196F3;
+  color: #2563EB;
 }
 
 .range-option.custom-button {
-  border-top: 1px solid #e0e0e0;
-  color: #2196F3;
+  border-top: 1px solid #E5E7EB;
+  color: #2563EB;
   font-weight: 500;
 }
 
@@ -175,14 +184,14 @@
 }
 
 .metric-label {
-  color: #666;
+  color: #9CA3AF;
   display: flex;
   align-items: center;
   gap: 4px;
-  font-weight: 700;
-  font-size: 16px;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  letter-spacing: 0.4px;
+  font-weight: 400;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  letter-spacing: 0;
 }
 
 .metric-item:first-child .metric-label {
@@ -229,21 +238,21 @@
 
 .metric-value {
   line-height: 1.2;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
 }
 
 .metric-value.positive {
-  color: #0CAF82;
-  font-size: 16px;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  font-weight: 700;
+  color: #2DBE8C;
+  font-size: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
 }
 
 .metric-value.negative {
-  color: #f23645;
-  font-size: 16px;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  color: #E5533D;
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
   font-weight: 700;
 }
 

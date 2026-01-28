@@ -1,6 +1,6 @@
 .trend-analysis {
-  background-color: transparent;
-  border-radius: 12px;
+  background-color: #FFFFFF;
+  border-radius: 16px;
   padding: 20px 20px 24px 20px;
   margin: 0 16px 20px 16px;
   box-shadow: none;
@@ -27,11 +27,11 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  letter-spacing: 0;
+  font-size: 19px;
+  font-weight: 600;
+  color: #0F172A;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.2px;
 }
 
 .refresh-icon {
@@ -53,16 +53,18 @@
 }
 
 .trend-button {
-  background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  background-color: #F1F5F9;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
   padding: 6px 12px;
   font-size: 13px;
-  color: #1a1a1a;
+  color: #0F172A;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
 }
 
 .trend-button:hover {
@@ -71,8 +73,8 @@
 
 .dropdown-arrow {
   font-size: 8px;
-  color: #1a1a1a;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  color: #0F172A;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   margin-left: 2px;
   display: inline-block;
   vertical-align: middle;
@@ -98,14 +100,14 @@
 }
 
 .chart-container .recharts-cartesian-axis-line {
-  stroke: #e0e0e0;
+  stroke: #E5E7EB;
   stroke-width: 0.5px;
 }
 
 .chart-container .recharts-cartesian-axis-tick-value {
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   font-size: 12px;
-  fill: #666;
+  fill: #9CA3AF;
 }
 
 .chart-container .recharts-xAxis .recharts-cartesian-axis-tick {
@@ -162,32 +164,32 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   white-space: nowrap;
 }
 
 .tooltip-date {
   font-size: 12px;
-  color: #666;
+  color: #6B7280;
   font-weight: 400;
 }
 
 .tooltip-value {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .tooltip-value.positive {
-  color: #0CAF82;
+  color: #2DBE8C;
 }
 
 .tooltip-value.negative {
-  color: #f23645;
+  color: #E5533D;
 }
 
 /* Hover cursor line - dashed green */
 .recharts-tooltip-cursor {
-  stroke: #0CAF82 !important;
+  stroke: #2DBE8C !important;
   stroke-width: 1px !important;
   stroke-dasharray: 5 5 !important;
 }
@@ -199,7 +201,7 @@
 
 /* Active dot styling */
 .recharts-active-dot circle {
-  fill: #0CAF82 !important;
+  fill: #2DBE8C !important;
   stroke: #fff !important;
   stroke-width: 2 !important;
   r: 6 !important;
@@ -216,7 +218,7 @@
 .summary-divider {
   width: 1px;
   height: 50px;
-  background-color: #e0e0e0;
+  background-color: #E5E7EB;
   flex-shrink: 0;
 }
 
@@ -228,29 +230,29 @@
 
 .summary-label {
   font-size: 13px;
-  color: #666;
+  color: #6B7280;
   display: flex;
   align-items: center;
   gap: 4px;
   font-weight: 400;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
 }
 
 .summary-value {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #0F172A;
   line-height: 1.2;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
   font-variant-numeric: proportional-nums;
 }
 
 .summary-value.positive {
-  color: #0CAF82;
+  color: #2DBE8C;
 }
 
 .summary-value.negative {
-  color: #f23645;
+  color: #E5533D;
 }
 
 .arrow-icon {

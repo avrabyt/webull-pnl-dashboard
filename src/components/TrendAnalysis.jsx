@@ -139,12 +139,12 @@ function TrendAnalysis({ dateRange }) {
           <ComposedChart data={data} margin={{ top: 20, right: 40, left: 40, bottom: 10 }}>
             <defs>
               <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0CAF82" stopOpacity={0.25}/>
-                <stop offset="95%" stopColor="#0CAF82" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#2DBE8C" stopOpacity={0.35}/>
+                <stop offset="95%" stopColor="#2DBE8C" stopOpacity={0.05}/>
               </linearGradient>
               <linearGradient id="redGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f23645" stopOpacity={0.4}/>
-                <stop offset="95%" stopColor="#f23645" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#E5533D" stopOpacity={0.35}/>
+                <stop offset="95%" stopColor="#E5533D" stopOpacity={0.05}/>
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#f5f5f5" vertical={false} />
@@ -170,7 +170,7 @@ function TrendAnalysis({ dateRange }) {
             <Line 
               type="monotone" 
               dataKey="negativeValue" 
-              stroke="#f23645"
+              stroke="#E5533D"
               strokeWidth={2.5}
               dot={false}
               connectNulls={true}
@@ -178,7 +178,7 @@ function TrendAnalysis({ dateRange }) {
             <Line 
               type="monotone" 
               dataKey="positiveValue" 
-              stroke="#0CAF82"
+              stroke="#2DBE8C"
               strokeWidth={2.5}
               dot={false}
               connectNulls={true}
@@ -190,7 +190,7 @@ function TrendAnalysis({ dateRange }) {
               strokeWidth={0}
               dot={false}
               connectNulls={true}
-              activeDot={{ r: 6, fill: '#0CAF82', stroke: '#fff', strokeWidth: 2 }}
+              activeDot={{ r: 6, fill: '#2DBE8C', stroke: '#fff', strokeWidth: 2 }}
             />
             <XAxis 
               dataKey="date" 
@@ -218,7 +218,7 @@ function TrendAnalysis({ dateRange }) {
                         y={rectY}
                         width={rectWidth}
                         height={rectHeight}
-                        fill="#0CAF82"
+                        fill="#2DBE8C"
                         rx={4}
                       />
                     )}
@@ -227,9 +227,9 @@ function TrendAnalysis({ dateRange }) {
                       y={0}
                       dy={textY}
                       textAnchor="middle"
-                      fill={isHovered ? "#fff" : "#666"}
+                      fill={isHovered ? "#fff" : "#9CA3AF"}
                       fontSize={12}
-                      fontFamily="'Open Sans', system-ui, sans-serif"
+                      fontFamily="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif"
                       fontWeight={isHovered ? 600 : 400}
                     >
                       {payload.value}
@@ -247,7 +247,7 @@ function TrendAnalysis({ dateRange }) {
             />
             <YAxis 
               orientation="right"
-              tick={{ fill: '#666', fontSize: 12, fontFamily: 'Open Sans, system-ui, sans-serif' }}
+              tick={{ fill: '#9CA3AF', fontSize: 12, fontFamily: '-apple-system, BlinkMacSystemFont, SF Pro Text, Inter, system-ui, sans-serif' }}
               axisLine={false}
               tickLine={false}
               domain={['auto', 'auto']}
@@ -256,7 +256,7 @@ function TrendAnalysis({ dateRange }) {
             />
             <Tooltip 
               content={<CustomTooltip onHover={setHoveredDate} />}
-              cursor={{ stroke: '#0CAF82', strokeWidth: 1, strokeDasharray: '5 5' }}
+              cursor={{ stroke: '#2DBE8C', strokeWidth: 1, strokeDasharray: '5 5' }}
               allowEscapeViewBox={{ x: true, y: true }}
               position={{ y: 0 }}
               offset={0}

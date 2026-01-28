@@ -30,26 +30,26 @@
   border: none;
   padding: 16px 20px;
   padding-bottom: 12px;
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 500;
-  color: #666;
+  color: #6B7280;
   cursor: pointer;
   white-space: nowrap;
   border-bottom: 3px solid transparent;
   transition: all 0.2s;
   position: relative;
-  font-family: 'Open Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
 }
 
 .nav-tab:hover {
-  color: #1a1a1a;
-  background-color: #f9f9f9;
+  color: #0F172A;
+  background-color: #F8FAFC;
 }
 
 .nav-tab.active {
-  color: #1a1a1a;
+  color: #0F172A;
   border-bottom: none;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .nav-tab.active::after {
@@ -60,7 +60,7 @@
   transform: translateX(-50%);
   width: 35%;
   height: 3px;
-  background-color: #2196F3;
+  background-color: #2563EB;
   border-radius: 2px 2px 0 0;
 }
 
