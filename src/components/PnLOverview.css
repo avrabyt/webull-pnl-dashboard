@@ -145,12 +145,12 @@
 
 .range-option.selected {
   background-color: #E3F2FD;
-  color: #2563EB;
+  color: #2196F3;
 }
 
 .range-option.custom-button {
   border-top: 1px solid #E5E7EB;
-  color: #2563EB;
+  color: #2196F3;
   font-weight: 500;
 }
 
