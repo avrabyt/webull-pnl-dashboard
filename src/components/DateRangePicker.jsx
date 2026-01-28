@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './DateRangePicker.css'
 
 function DateRangePicker({ dateRange, setDateRange, onClose }) {
   // Get current date first
   const now = new Date()
-  const currentMonth = now.getMonth() // 0-11
-  const currentDay = now.getDate()
-  const currentYear = now.getFullYear()
+  const todayMonth = now.getMonth() // 0-11
+  const todayDay = now.getDate()
+  const todayYear = now.getFullYear()
+  
+  // Refs for columns
+  const monthColumnRef = useRef(null)
+  const dayColumnRef = useRef(null)
+  const yearColumnRef = useRef(null)
+  
+  // State for selected values
+  const [selectedMonth, setSelectedMonth] = useState(todayMonth)
+  const [selectedDay, setSelectedDay] = useState(todayDay)
+  const [selectedYear, setSelectedYear] = useState(todayYear)
   
   // Format current date as MM/DD/YYYY
   const formatDate = (month, day, year) => {
@@ -15,7 +25,7 @@ function DateRangePicker({ dateRange, setDateRange, onClose }) {
     return `${monthStr}/${dayStr}/${year}`
   }
   
-  const todayDateString = formatDate(currentMonth, currentDay, currentYear)
+  const todayDateString = formatDate(todayMonth, todayDay, todayYear)
   
   const [startDate, setStartDate] = useState(dateRange.start || todayDateString)
   const [endDate, setEndDate] = useState(dateRange.end || todayDateString)
@@ -26,6 +36,16 @@ function DateRangePicker({ dateRange, setDateRange, onClose }) {
                   'July', 'August', 'September', 'October', 'November', 'December']
   const years = Array.from({ length: 8 }, (_, i) => 2021 + i)
   const days = Array.from({ length: 31 }, (_, i) => i + 1)
+  
+  // Update the active date input when selection changes
+  useEffect(() => {
+    const newDate = formatDate(selectedMonth, selectedDay, selectedYear)
+    if (activeField === 'start') {
+      setStartDate(newDate)
+    } else if (activeField === 'end') {
+      setEndDate(newDate)
+    }
+  }, [selectedMonth, selectedDay, selectedYear, activeField])
 
   // Prevent body scrolling when modal is open
   useEffect(() => {
@@ -35,41 +55,45 @@ function DateRangePicker({ dateRange, setDateRange, onClose }) {
     }
   }, [])
 
-  // Scroll to current date when component mounts
+  // Scroll to selected date when component mounts
   useEffect(() => {
-    setTimeout(() => {
-      const monthColumn = document.querySelector('.calendar-column:first-child')
-      const dayColumn = document.querySelector('.calendar-column:nth-child(2)')
-      const yearColumn = document.querySelector('.calendar-column:last-child')
+    const attemptScroll = () => {
+      const columns = [monthColumnRef.current, dayColumnRef.current, yearColumnRef.current]
       
-      if (monthColumn) {
-        const monthItem = monthColumn.children[currentMonth + 1] // +1 for header
-        if (monthItem) {
-          monthItem.scrollIntoView({ behavior: 'auto', block: 'center' })
-        }
-      }
+      // Add no-snap to all columns
+      columns.forEach(col => col?.classList.add('no-snap'))
       
-      if (dayColumn) {
-        const dayItem = dayColumn.children[currentDay] // header is at 0, day 1 is at 1, so currentDay is correct
-        if (dayItem) {
-          dayItem.scrollIntoView({ behavior: 'auto', block: 'center' })
-        }
-      }
+      // Simply scroll each selected item into view
+      columns.forEach(column => {
+        if (!column) return
+        
+        const selectedItem = column.querySelector('.calendar-item.selected')
+        if (!selectedItem) return
+        
+        // Scroll the selected item to the center of the column
+        selectedItem.scrollIntoView({ block: 'center', behavior: 'instant' })
+      })
       
-      if (yearColumn) {
-        const yearIndex = years.indexOf(currentYear)
-        if (yearIndex >= 0) {
-          const yearItem = yearColumn.children[yearIndex + 1] // +1 for header
-          if (yearItem) {
-            yearItem.scrollIntoView({ behavior: 'auto', block: 'center' })
-          }
-        }
-      }
-    }, 100)
-  }, [currentMonth, currentDay, currentYear, years])
+      // Remove no-snap class after scroll completes
+      setTimeout(() => {
+        columns.forEach(col => col?.classList.remove('no-snap'))
+      }, 50)
+    }
+    
+    // Wait for modal animation to complete
+    const timer = setTimeout(attemptScroll, 400)
+    
+    return () => clearTimeout(timer)
+  }, []) // Only run on mount
 
   const handleApply = () => {
-    setDateRange({ start: startDate, end: endDate })
+    // Use the selected date for the active field
+    const selectedDate = formatDate(selectedMonth, selectedDay, selectedYear)
+    if (activeField === 'start' || !activeField) {
+      setDateRange({ start: selectedDate, end: endDate })
+    } else {
+      setDateRange({ start: startDate, end: selectedDate })
+    }
     onClose()
   }
 
@@ -102,26 +126,35 @@ function DateRangePicker({ dateRange, setDateRange, onClose }) {
         </div>
 
         <div className="date-picker-calendar">
-          <div className="calendar-column">
-            <div className="column-header">Month</div>
+          <div className="calendar-column" ref={monthColumnRef}>
             {months.map((month, index) => (
-              <div key={month} className={`calendar-item ${index === currentMonth ? 'selected' : ''}`}>
+              <div 
+                key={month} 
+                className={`calendar-item ${index === selectedMonth ? 'selected' : ''}`}
+                onClick={() => setSelectedMonth(index)}
+              >
                 {month}
               </div>
             ))}
           </div>
-          <div className="calendar-column">
-            <div className="column-header">Day</div>
+          <div className="calendar-column" ref={dayColumnRef}>
             {days.map(day => (
-              <div key={day} className={`calendar-item ${day === currentDay ? 'selected' : ''}`}>
+              <div 
+                key={day} 
+                className={`calendar-item ${day === selectedDay ? 'selected' : ''}`}
+                onClick={() => setSelectedDay(day)}
+              >
                 {day}
               </div>
             ))}
           </div>
-          <div className="calendar-column">
-            <div className="column-header">Year</div>
+          <div className="calendar-column" ref={yearColumnRef}>
             {years.map(year => (
-              <div key={year} className={`calendar-item ${year === currentYear ? 'selected' : ''}`}>
+              <div 
+                key={year} 
+                className={`calendar-item ${year === selectedYear ? 'selected' : ''}`}
+                onClick={() => setSelectedYear(year)}
+              >
                 {year}
               </div>
             ))}

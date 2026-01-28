@@ -133,38 +133,26 @@
   scroll-snap-type: y mandatory;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  padding-top: 56px; /* Space for alignment */
+  padding-bottom: 150px; /* Space to scroll last items */
 }
 
 .calendar-column::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.column-header {
-  font-size: 14px;
-  font-weight: 600;
-  color: #666666;
-  padding: 10px 8px;
-  margin-bottom: 8px;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  background-color: #ffffff;
-  z-index: 10;
-  font-family: 'Open Sans', system-ui, sans-serif;
-  flex-shrink: 0;
-}
-
 .calendar-item {
   padding: 12px 8px;
   text-align: center;
-  font-size: 16px;
-  color: #BBBBBB;
+  font-size: 18px;
+  color: #C5C9D1;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0;
   transition: all 0.2s;
   font-family: 'Open Sans', system-ui, sans-serif;
   font-weight: 400;
-  min-height: 48px;
+  min-height: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,13 +167,15 @@
 }
 
 .calendar-item.selected {
-  background-color: #F2F4F7;
-  color: #666666;
-  font-weight: 700;
-  font-size: 19px;
+  background-color: #F5F6F8;
+  color: #1A1A1A;
+  font-weight: 600;
+  font-size: 22px;
   min-height: 56px;
-  padding: 14px 8px;
+  height: 56px;
+  padding: 12px 8px;
   line-height: 1.3;
+  border-radius: 0;
 }
 
 .date-picker-actions {
@@ -211,12 +201,12 @@
 }
 
 .cancel-btn {
-  background-color: #E0E0E0;
-  color: #555555;
+  background-color: #F0F0F0;
+  color: #4A90E2;
 }
 
 .cancel-btn:hover {
-  background-color: #d5d5d5;
+  background-color: #E8E8E8;
 }
 
 .apply-btn {
@@ -331,7 +321,7 @@
     max-height: 300px !important;
     scrollbar-width: none !important; /* Firefox */
     -ms-overflow-style: none !important; /* IE and Edge */
-    padding: 0 4px !important;
+    padding: 56px 4px 150px 4px !important; /* Top and bottom padding for alignment/scrolling */
   }
 
   .calendar-column::-webkit-scrollbar {
@@ -357,24 +347,28 @@
 
   .calendar-item {
     padding: 16px 8px !important;
-    font-size: 16px !important;
-    color: #BBBBBB !important;
+    font-size: 18px !important;
+    color: #C5C9D1 !important;
     min-height: 56px !important;
+    height: 56px !important;
     line-height: 1.4 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     box-sizing: border-box !important;
+    border-radius: 0 !important;
   }
   
   .calendar-item.selected {
-    color: #666666 !important;
-    font-size: 19px !important;
-    font-weight: 700 !important;
-    background-color: #F2F4F7 !important;
-    min-height: 60px !important;
-    padding: 18px 8px !important;
+    color: #1A1A1A !important;
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    background-color: #F5F6F8 !important;
+    min-height: 56px !important;
+    height: 56px !important;
+    padding: 16px 8px !important;
     line-height: 1.3 !important;
+    border-radius: 0 !important;
   }
 
   .date-picker-actions {
@@ -423,13 +417,13 @@
   }
 
   .cancel-btn {
-    background-color: #E0E0E0 !important;
-    color: #555555 !important;
+    background-color: #F0F0F0 !important;
+    color: #4A90E2 !important;
     border: none !important;
   }
 
   .cancel-btn:active {
-    background-color: #eeeeee !important;
+    background-color: #E8E8E8 !important;
   }
 
   .apply-btn {
@@ -455,4 +449,83 @@
     font-size: 15px;
     min-height: 44px;
   }
+}
+
+/* Extra small screens (iPhone SE, small Android devices) */
+@media (max-width: 375px), (max-height: 600px) {
+  .date-picker-modal {
+    min-height: 50vh !important;
+    max-height: 90vh !important;
+    padding-bottom: 80px !important;
+  }
+
+  .date-picker-header {
+    padding-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .date-picker-header h3 {
+    font-size: 16px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .picker-description {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+
+  .date-inputs {
+    margin-bottom: 12px !important;
+    gap: 4px !important;
+  }
+
+  .date-input {
+    padding: 8px 6px !important;
+    font-size: 13px !important;
+  }
+
+  .date-picker-calendar {
+    gap: 4px !important;
+  }
+
+  .calendar-column {
+    max-height: 200px !important;
+    padding: 50px 2px 80px 2px !important;
+  }
+
+  .calendar-item {
+    padding: 8px 4px !important;
+    font-size: 14px !important;
+    min-height: 44px !important;
+    height: 44px !important;
+  }
+
+  .calendar-item.selected {
+    font-size: 16px !important;
+    min-height: 44px !important;
+    height: 44px !important;
+    padding: 8px 4px !important;
+  }
+
+  .date-picker-actions {
+    padding: 12px !important;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    min-height: 70px !important;
+  }
+
+  .cancel-btn,
+  .apply-btn {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
+  }
+}
+
+/* Utility class to disable scroll snap during programmatic scrolling - must be last */
+.calendar-column.no-snap {
+  scroll-snap-type: none !important;
+}
+
+.calendar-column.no-snap .calendar-item {
+  scroll-snap-align: none !important;
 }
