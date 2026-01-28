@@ -27,6 +27,7 @@ function App() {
   const touchEndX = useRef(0)
   const touchStartY = useRef(0)
   const touchEndY = useRef(0)
+  const mainContentRef = useRef(null)
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX
@@ -51,8 +52,12 @@ function App() {
         setShowPnLComponents(true)
       }
     } else {
-      // If swipe up more than 80px, show Benchmark Selector
-      if (swipeDistanceY > 80) {
+      // For swipe up: only trigger if started from bottom 120px of screen
+      // This prevents conflict with normal scrolling
+      const screenHeight = window.innerHeight
+      const startedFromBottom = touchStartY.current > screenHeight - 120
+      
+      if (swipeDistanceY > 80 && startedFromBottom) {
         setShowBenchmarkSelector(true)
       }
     }
