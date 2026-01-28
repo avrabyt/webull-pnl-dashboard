@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import HeaderBar from './components/HeaderBar'
 import Navigation from './components/Navigation'
 import PnLOverview from './components/PnLOverview'
@@ -22,6 +22,48 @@ function App() {
     end: '01/16/2026'
   })
 
+  // Swipe detection for mobile
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+  const touchStartY = useRef(0)
+  const touchEndY = useRef(0)
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX
+    touchEndY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = () => {
+    const swipeDistanceX = touchStartX.current - touchEndX.current
+    const swipeDistanceY = touchStartY.current - touchEndY.current
+    
+    // Determine if it's more of a horizontal or vertical swipe
+    const isHorizontalSwipe = Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)
+    
+    if (isHorizontalSwipe) {
+      // If swipe left more than 80px, show P&L Components
+      if (swipeDistanceX > 80) {
+        setShowPnLComponents(true)
+      }
+    } else {
+      // If swipe up more than 80px, show Benchmark Selector
+      if (swipeDistanceY > 80) {
+        setShowBenchmarkSelector(true)
+      }
+    }
+    
+    // Reset
+    touchStartX.current = 0
+    touchEndX.current = 0
+    touchStartY.current = 0
+    touchEndY.current = 0
+  }
+
   if (showPnLComponents) {
     return (
       <div className="app">
@@ -39,7 +81,12 @@ function App() {
       <div className="app">
         <HeaderBar onMenuClick={() => setShowNavigationDrawer(true)} />
         <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="main-content">
+        <div 
+          className="main-content"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="sub-navigation">
             <button 
               className={`sub-nav-btn ${activeSubTab === 'Account P&L' ? 'active' : ''}`}
