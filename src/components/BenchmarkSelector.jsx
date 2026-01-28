@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import './BenchmarkSelector.css'
 
 function BenchmarkSelector({ selectedBenchmark, onSelect, onClose }) {
@@ -48,8 +49,16 @@ function BenchmarkSelector({ selectedBenchmark, onSelect, onClose }) {
     }
   }
 
-  return (
-    <div className="benchmark-overlay" onClick={handleClose}>
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  const content = (
+    <div className={`benchmark-overlay ${isClosing ? 'closing' : ''}`} onClick={handleClose}>
       <div 
         className={`benchmark-modal ${isClosing ? 'closing' : ''}`}
         onClick={(e) => e.stopPropagation()}
@@ -81,9 +90,11 @@ function BenchmarkSelector({ selectedBenchmark, onSelect, onClose }) {
                 <div className="benchmark-name">{benchmark.name}</div>
               </div>
               {selectedBenchmark === benchmark.symbol && (
-                <svg className="benchmark-check" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1890ff" strokeWidth="3">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
+                <div className="benchmark-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1890ff" strokeWidth="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
               )}
             </div>
           ))}
@@ -91,6 +102,8 @@ function BenchmarkSelector({ selectedBenchmark, onSelect, onClose }) {
       </div>
     </div>
   )
+
+  return createPortal(content, document.body)
 }
 
 export default BenchmarkSelector

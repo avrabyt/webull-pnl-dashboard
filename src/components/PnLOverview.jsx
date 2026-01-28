@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import DateRangePicker from './DateRangePicker'
-import BenchmarkSelector from './BenchmarkSelector'
 import './PnLOverview.css'
 
-function PnLOverview({ dateRange, setDateRange, onShowComponents }) {
+function PnLOverview({ dateRange, setDateRange, onShowComponents, onShowBenchmark, selectedBenchmark }) {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showRangeDropdown, setShowRangeDropdown] = useState(false)
   const [selectedRange, setSelectedRange] = useState('Custom')
-  const [showBenchmarkSelector, setShowBenchmarkSelector] = useState(false)
-  const [selectedBenchmark, setSelectedBenchmark] = useState('SPX')
 
   const predefinedRanges = ['5D', '1M', '3M', '6M', 'YTD', '1Y', 'All']
 
@@ -67,7 +64,7 @@ function PnLOverview({ dateRange, setDateRange, onShowComponents }) {
           </div>
           <div className="metric-value positive">+4.48%</div>
         </div>
-        <div className="metric-item" onClick={() => setShowBenchmarkSelector(true)} style={{ cursor: 'pointer' }}>
+        <div className="metric-item" onClick={onShowBenchmark} style={{ cursor: 'pointer' }}>
           <div className="metric-label">
             <span className={selectedBenchmark === 'SPX' ? 'spx-indicator' : 'dji-indicator'}></span> {selectedBenchmark} <span className="dropdown-arrow">▼</span>
           </div>
@@ -80,14 +77,6 @@ function PnLOverview({ dateRange, setDateRange, onShowComponents }) {
           dateRange={dateRange}
           setDateRange={setDateRange}
           onClose={() => setShowDatePicker(false)}
-        />
-      )}
-
-      {showBenchmarkSelector && (
-        <BenchmarkSelector
-          selectedBenchmark={selectedBenchmark}
-          onSelect={setSelectedBenchmark}
-          onClose={() => setShowBenchmarkSelector(false)}
         />
       )}
     </div>
