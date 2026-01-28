@@ -1,10 +1,16 @@
 import React, { useState, useRef } from 'react'
+import DateRangePicker from './DateRangePicker'
 import './PnLComponents.css'
 
-function PnLComponents({ dateRange, onBack }) {
+function PnLComponents({ dateRange, setDateRange, onBack }) {
   const [isClosing, setIsClosing] = useState(false)
+  const [showDatePicker, setShowDatePicker] = useState(false)
+  const [showRangeDropdown, setShowRangeDropdown] = useState(false)
+  const [selectedRange, setSelectedRange] = useState('Custom')
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
+
+  const predefinedRanges = ['5D', '1M', '3M', '6M', 'YTD', '1Y', 'All']
 
   const handleBack = () => {
     setIsClosing(true)
@@ -141,9 +147,39 @@ function PnLComponents({ dateRange, onBack }) {
             </div>
             <div className="cumulative-range">Range: {dateRange.start} - {dateRange.end}</div>
           </div>
-          <button className="custom-dropdown-btn">
-            Custom <span className="dropdown-arrow">▼</span>
-          </button>
+          <div className="date-range-selector">
+            <button 
+              className="custom-dropdown-btn"
+              onClick={() => setShowRangeDropdown(!showRangeDropdown)}
+            >
+              {selectedRange} <span className="dropdown-arrow">▼</span>
+            </button>
+            {showRangeDropdown && (
+              <div className="range-dropdown">
+                {predefinedRanges.map(range => (
+                  <button
+                    key={range}
+                    className={`range-option ${selectedRange === range ? 'selected' : ''}`}
+                    onClick={() => {
+                      setSelectedRange(range)
+                      setShowRangeDropdown(false)
+                    }}
+                  >
+                    {range}
+                  </button>
+                ))}
+                <button
+                  className="range-option custom-option"
+                  onClick={() => {
+                    setShowRangeDropdown(false)
+                    setShowDatePicker(true)
+                  }}
+                >
+                  Custom
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="cumulative-description">
           Cumulative P&L represents the total profit and loss over a selected time period. 
@@ -194,6 +230,17 @@ function PnLComponents({ dateRange, onBack }) {
           ))}
         </div>
       </div>
+
+      {showDatePicker && (
+        <DateRangePicker
+          dateRange={dateRange}
+          setDateRange={(newRange) => {
+            setDateRange(newRange)
+            setSelectedRange('Custom')
+          }}
+          onClose={() => setShowDatePicker(false)}
+        />
+      )}
     </div>
   )
 }

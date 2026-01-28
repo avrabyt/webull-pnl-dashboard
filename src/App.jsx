@@ -26,7 +26,8 @@ function App() {
     return (
       <div className="app">
         <PnLComponents 
-          dateRange={dateRange} 
+          dateRange={dateRange}
+          setDateRange={setDateRange}
           onBack={() => setShowPnLComponents(false)} 
         />
       </div>
