@@ -139,8 +139,8 @@ function TrendAnalysis({ dateRange }) {
           <ComposedChart data={data} margin={{ top: 20, right: 40, left: 40, bottom: 10 }}>
             <defs>
               <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2DBE8C" stopOpacity={0.35}/>
-                <stop offset="95%" stopColor="#2DBE8C" stopOpacity={0.05}/>
+                <stop offset="5%" stopColor="#16c49b" stopOpacity={0.35}/>
+                <stop offset="95%" stopColor="#16c49b" stopOpacity={0.05}/>
               </linearGradient>
               <linearGradient id="redGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#E5533D" stopOpacity={0.35}/>
@@ -178,7 +178,7 @@ function TrendAnalysis({ dateRange }) {
             <Line 
               type="monotone" 
               dataKey="positiveValue" 
-              stroke="#2DBE8C"
+              stroke="#16c49b"
               strokeWidth={2.5}
               dot={false}
               connectNulls={true}
@@ -190,7 +190,7 @@ function TrendAnalysis({ dateRange }) {
               strokeWidth={0}
               dot={false}
               connectNulls={true}
-              activeDot={{ r: 6, fill: '#2DBE8C', stroke: '#fff', strokeWidth: 2 }}
+              activeDot={{ r: 6, fill: '#16c49b', stroke: '#fff', strokeWidth: 2 }}
             />
             <XAxis 
               dataKey="date" 
@@ -218,7 +218,7 @@ function TrendAnalysis({ dateRange }) {
                         y={rectY}
                         width={rectWidth}
                         height={rectHeight}
-                        fill="#2DBE8C"
+                        fill="#16c49b"
                         rx={4}
                       />
                     )}
@@ -256,7 +256,7 @@ function TrendAnalysis({ dateRange }) {
             />
             <Tooltip 
               content={<CustomTooltip onHover={setHoveredDate} />}
-              cursor={{ stroke: '#2DBE8C', strokeWidth: 1, strokeDasharray: '5 5' }}
+              cursor={{ stroke: '#16c49b', strokeWidth: 1, strokeDasharray: '5 5' }}
               allowEscapeViewBox={{ x: true, y: true }}
               position={{ y: 0 }}
               offset={0}

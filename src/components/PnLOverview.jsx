@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import DateRangePicker from './DateRangePicker'
 import './PnLOverview.css'
 
@@ -6,8 +6,28 @@ function PnLOverview({ dateRange, setDateRange, onShowComponents, onShowBenchmar
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showRangeDropdown, setShowRangeDropdown] = useState(false)
   const [selectedRange, setSelectedRange] = useState('Custom')
+  const dropdownOpenTime = useRef(0)
 
   const predefinedRanges = ['5D', '1M', '3M', '6M', 'YTD', '1Y', 'All']
+
+  const openDropdown = () => {
+    dropdownOpenTime.current = Date.now()
+    setShowRangeDropdown(true)
+  }
+
+  const handleOptionClick = (range) => {
+    // Ignore clicks within 300ms of dropdown opening (prevents ghost clicks on mobile)
+    if (Date.now() - dropdownOpenTime.current < 300) return
+    setSelectedRange(range)
+    setShowRangeDropdown(false)
+  }
+
+  const handleCustomClick = () => {
+    // Ignore clicks within 300ms of dropdown opening (prevents ghost clicks on mobile)
+    if (Date.now() - dropdownOpenTime.current < 300) return
+    setShowRangeDropdown(false)
+    setShowDatePicker(true)
+  }
 
   return (
     <div className="pnl-overview">
@@ -16,10 +36,15 @@ function PnLOverview({ dateRange, setDateRange, onShowComponents, onShowBenchmar
           <h2 className="section-title">P&L Overview</h2>
           <div className="date-range-text">Range: {dateRange.start} - {dateRange.end}</div>
         </div>
-        <div className="date-range-selector">
+        <div 
+          className="date-range-selector"
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
+        >
           <button 
             className="range-button"
-            onClick={() => setShowRangeDropdown(!showRangeDropdown)}
+            onClick={() => showRangeDropdown ? setShowRangeDropdown(false) : openDropdown()}
           >
             {selectedRange} <span className="dropdown-arrow">▼</span>
           </button>
@@ -29,20 +54,14 @@ function PnLOverview({ dateRange, setDateRange, onShowComponents, onShowBenchmar
                 <button
                   key={range}
                   className={`range-option ${selectedRange === range ? 'selected' : ''}`}
-                  onClick={() => {
-                    setSelectedRange(range)
-                    setShowRangeDropdown(false)
-                  }}
+                  onClick={() => handleOptionClick(range)}
                 >
                   {range}
                 </button>
               ))}
               <button
                 className="range-option custom-button"
-                onClick={() => {
-                  setShowRangeDropdown(false)
-                  setShowDatePicker(true)
-                }}
+                onClick={handleCustomClick}
               >
                 Custom
               </button>

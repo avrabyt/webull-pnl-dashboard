@@ -180,7 +180,7 @@
 }
 
 .tooltip-value.positive {
-  color: #2DBE8C;
+  color: #16c49b;
 }
 
 .tooltip-value.negative {
@@ -189,7 +189,7 @@
 
 /* Hover cursor line - dashed green */
 .recharts-tooltip-cursor {
-  stroke: #2DBE8C !important;
+  stroke: #16c49b !important;
   stroke-width: 1px !important;
   stroke-dasharray: 5 5 !important;
 }
@@ -201,7 +201,7 @@
 
 /* Active dot styling */
 .recharts-active-dot circle {
-  fill: #2DBE8C !important;
+  fill: #16c49b !important;
   stroke: #fff !important;
   stroke-width: 2 !important;
   r: 6 !important;
@@ -248,7 +248,7 @@
 }
 
 .summary-value.positive {
-  color: #2DBE8C;
+  color: #16c49b;
 }
 
 .summary-value.negative {
