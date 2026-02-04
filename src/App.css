@@ -36,7 +36,7 @@
   background-color: #F1F5F9;
   border: none;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: #6B7280;
   cursor: pointer;
@@ -53,6 +53,7 @@
   color: #2196F3;
   background-color: #F1F5F9;
   font-weight: 600;
+  font-style: bold;
 }
 
 @media (max-width: 768px) {
@@ -96,6 +97,7 @@
 
   .sub-nav-btn {
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 400;
   }
 }

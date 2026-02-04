@@ -1,41 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './PnLCalendar.css'
 
 function PnLCalendar() {
-  const [selectedMonth, setSelectedMonth] = useState('2026-01')
+  const [selectedMonth, setSelectedMonth] = useState('2025-12')
   const [viewMode, setViewMode] = useState('Month')
+  const [showDropdown, setShowDropdown] = useState(false)
+  const dropdownRef = useRef(null)
 
-  // Sample calendar data
+  // Month options
+  const monthOptions = ['2025-10', '2025-11', '2025-12', '2026-01', '2026-02']
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [])
+
+  // Sample calendar data matching the screenshot
+  const calendarData = {
+    '2025-12': {
+      1: -12060, 2: -4740, 3: -794.11, 4: 83.93, 5: -156.03,
+      8: -4.52,
+      15: 2050, 16: -7330, 17: -10940, 18: -189.03, 19: -2.69,
+      22: -993.56, 23: -6700, 24: -1090, 26: -212.02,
+      29: -2.00
+    }
+  }
+
   const generateCalendarData = () => {
-    const days = []
     const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+    const days = []
     
-    // Get first day of month and number of days
     const [year, month] = selectedMonth.split('-').map(Number)
     const firstDay = new Date(year, month - 1, 1).getDay()
     const daysInMonth = new Date(year, month, 0).getDate()
+    const prevMonthDays = new Date(year, month - 1, 0).getDate()
     
-    // Add empty cells for days before month starts
-    for (let i = 0; i < firstDay; i++) {
-      days.push({ day: null, value: null, isToday: false, isSelected: false })
+    // Add days from previous month
+    for (let i = firstDay - 1; i >= 0; i--) {
+      days.push({ 
+        day: prevMonthDays - i, 
+        value: 0, 
+        isOtherMonth: true 
+      })
     }
     
-    // Add days of month
+    // Add days of current month
+    const monthData = calendarData[selectedMonth] || {}
     for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(year, month - 1, day)
-      const isToday = false // You can add logic to check if it's today
-      const isSelected = day === 20 && month === 12 && year === 2025 // Highlighted date from image
-      
-      // Sample P&L values
-      let value = 0.00
-      if (day === 29 && month === 1 && year === 2026) {
-        value = -2.00
-      }
-      
-      days.push({ day, value, isToday, isSelected })
+      const value = monthData[day] || 0
+      days.push({ day, value, isOtherMonth: false })
+    }
+    
+    // Add days from next month to complete the grid (6 rows)
+    const remainingDays = 42 - days.length
+    for (let i = 1; i <= remainingDays; i++) {
+      days.push({ day: i, value: 0, isOtherMonth: true })
     }
     
     return { daysOfWeek, days }
+  }
+
+  const formatValue = (value) => {
+    if (value === 0) return '0.00'
+    const absValue = Math.abs(value)
+    if (absValue >= 1000) {
+      return (value < 0 ? '-' : '+') + (absValue / 1000).toFixed(2) + 'K'
+    }
+    return (value < 0 ? '' : '+') + value.toFixed(2)
   }
 
   const { daysOfWeek, days } = generateCalendarData()
@@ -43,37 +84,57 @@ function PnLCalendar() {
   return (
     <div className="pnl-calendar">
       <div className="calendar-header">
-        <div>
-          <h2 className="section-title">
-            P&L Calendar
-            <span className="info-icon">i</span>
-            <span className="refresh-icon">↻</span>
-          </h2>
-        </div>
-        <div className="calendar-controls">
-          <select 
+        <h2 className="section-title">
+          P&L Calendar
+          <span className="info-icon">i</span>
+          <span className="refresh-icon">↻</span>
+        </h2>
+      </div>
+      
+      <div className="calendar-controls">
+        <div 
+          className="month-selector-wrapper" 
+          ref={dropdownRef}
+          onTouchStart={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          onTouchEnd={(e) => e.stopPropagation()}
+        >
+          <button 
             className="month-selector"
-            value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
+            onClick={() => setShowDropdown(!showDropdown)}
           >
-            <option value="2025-12">2025-12</option>
-            <option value="2026-01">2026-01</option>
-            <option value="2026-02">2026-02</option>
-          </select>
-          <div className="view-toggle">
-            <button 
-              className={`toggle-btn ${viewMode === 'Month' ? 'active' : ''}`}
-              onClick={() => setViewMode('Month')}
-            >
-              Month
-            </button>
-            <button 
-              className={`toggle-btn ${viewMode === 'Year' ? 'active' : ''}`}
-              onClick={() => setViewMode('Year')}
-            >
-              Year
-            </button>
-          </div>
+            {selectedMonth} <span className="dropdown-arrow">▼</span>
+          </button>
+          {showDropdown && (
+            <div className="month-dropdown">
+              {monthOptions.map(month => (
+                <button
+                  key={month}
+                  className={`month-option ${selectedMonth === month ? 'selected' : ''}`}
+                  onClick={() => {
+                    setSelectedMonth(month)
+                    setShowDropdown(false)
+                  }}
+                >
+                  {month}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="view-toggle">
+          <button 
+            className={`toggle-btn ${viewMode === 'Month' ? 'active' : ''}`}
+            onClick={() => setViewMode('Month')}
+          >
+            Month
+          </button>
+          <button 
+            className={`toggle-btn ${viewMode === 'Year' ? 'active' : ''}`}
+            onClick={() => setViewMode('Year')}
+          >
+            Year
+          </button>
         </div>
       </div>
 
@@ -87,14 +148,12 @@ function PnLCalendar() {
           {days.map((item, index) => (
             <div 
               key={index} 
-              className={`calendar-day ${item.isSelected ? 'selected' : ''} ${item.value !== null && item.value !== 0 ? item.value < 0 ? 'negative' : 'positive' : ''}`}
+              className={`calendar-day ${item.isOtherMonth ? 'other-month' : ''} ${!item.isOtherMonth && item.value !== 0 ? (item.value < 0 ? 'negative' : 'positive') : ''}`}
             >
-              {item.day && (
-                <>
-                  <div className="day-number">{item.day}</div>
-                  <div className="day-value">{item.value !== null ? item.value.toFixed(2) : '0.00'}</div>
-                </>
-              )}
+              <div className={`day-number ${item.isOtherMonth ? 'muted' : ''}`}>{item.day}</div>
+              <div className={`day-value ${item.value < 0 ? 'negative' : item.value > 0 ? 'positive' : ''}`}>
+                {formatValue(item.value)}
+              </div>
             </div>
           ))}
         </div>
