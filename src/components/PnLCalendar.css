@@ -145,7 +145,7 @@
 
 .toggle-btn.active {
   background-color: #FFFFFF;
-  color: #2563EB;
+  color: #2196F3;
   font-weight: 600;
 }
 
@@ -297,7 +297,7 @@
   }
 
   .calendar-header .section-title {
-    font-size: 18px;
+    font-size: 23px;
   }
 
   .calendar-day {
